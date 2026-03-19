@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizzería Mauri</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+<header>
+
+<div class="video-container">
+  <iframe 
+    src="https://www.youtube.com/embed/LpTcuYBAT0I?autoplay=1&mute=1&loop=1&playlist=LpTcuYBAT0I&controls=0&modestbranding=1"
+    frameborder="0"
+    allow="autoplay"
+    class="video-bg">
+  </iframe>
+</div>
+
+<nav class="navbar">
+  <h1 class="logo">🍕 La Esquina Comidas</h1>
+</nav>
+
+</header>
+
+<section class="menu" id="menu"></section>
+<div class="overlay" id="overlay"
+onclick="toggleCarrito()"></div>
+
+<button class="btn-carrito" onclick="toggleCarrito()">
+🛒 Ver pedido
+</button>
+<div class="carrito" id="carrito">
+
+<button class="cerrar" onclick="toggleCarrito()">X</button>
+
+<h2>🛒 Pedido </h2>
+
+<ul id="listaCarrito"></ul>
+
+<p>Total: $<span id="total">0</span></p>
+
+<input id="nombre" placeholder="Tu nombre">
+
+<input id="direccion" placeholder="Dirección">
+
+<button class="enviarPedido" onclick="enviarPedido()">Enviar al WhatsApp</button>
+
+</div>
+<script src="./js/script.js"></script>
+
+
+<footer>
+<p>Abierto de 19:00 a 23:30</p>
+</footer>
+</body>
+</html>
