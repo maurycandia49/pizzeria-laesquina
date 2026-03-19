@@ -1,13 +1,13 @@
 const productos=[
 
-{nombre:"Muzzarella",precio:10000,imagen:"./imagenes/muzzarella.jpg"},
-{nombre:"Napolitana",precio:11000,imagen:"./imagenes/napolitana.jpg"},
-{nombre:"Fugazzeta",precio:12000,imagen:"./imagenes/fugazzeta.jpg"},
-{nombre:"Jamón y morrones",precio:12500,imagen:"./imagenes/jamon-y-morrones.jpg"},
-{nombre:"Cochina",precio:13000,imagen:"./imagenes/cochina.jpg"},
-{nombre:"Tomate y albahaca",precio:15000,imagen:"./imagenes/tomate-y-albahaca.jpg"},
-{nombre:"sandwich de milanesa",precio:9000,imagen:"./imagenes/sandwich-de-milanesa.jpg"},
-{nombre:"cono de papas",precio:5000,imagen:"./imagenes/cono-de-papas.jpg"},
+{nombre:"Muzzarella",precio:10000,imagen:"imagenes/muzzarella.jpg"},
+{nombre:"Napolitana",precio:11000,imagen:"imagenes/napolitana.jpg"},
+{nombre:"Fugazzeta",precio:12000,imagen:"imagenes/fugazzeta.jpg"},
+{nombre:"Jamón y morrones",precio:12500,imagen:"imagenes/jamon-y-morrones.jpg"},
+{nombre:"Cochina",precio:13000,imagen:"imagenes/cochina.jpg"},
+{nombre:"Tomate y albahaca",precio:15000,imagen:"imagenes/tomate-y-albahaca.jpg"},
+{nombre:"sandwich de milanesa",precio:9000,imagen:"imagenes/sandwich-de-milanesa.jpg"},
+{nombre:"cono de papas",precio:5000,imagen:"imagenes/cono-de-papas.jpg"},
 
 ]
 
