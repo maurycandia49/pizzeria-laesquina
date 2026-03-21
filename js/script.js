@@ -187,6 +187,52 @@ guardarCarrito()
 mostrarCarrito()
 
 }
+function agregarCombo(i){
+
+  let combo = combos[i]
+
+  // 🔥 ANIMACIÓN (igual que pizzas)
+  let img = document.createElement("img")
+  img.src = combo.imagen
+  img.classList.add("volando")
+  document.body.appendChild(img)
+
+  let boton = event.target
+  let rect = boton.getBoundingClientRect()
+
+  img.style.left = rect.left + "px"
+  img.style.top = rect.top + "px"
+
+  let carritoIcono = document.querySelector(".btn-carrito")
+  let carritoRect = carritoIcono.getBoundingClientRect()
+
+  setTimeout(()=>{
+    img.style.left = carritoRect.left + "px"
+    img.style.top = carritoRect.top + "px"
+    img.style.transform = "scale(0.2)"
+    img.style.opacity = "0.3"
+  },10)
+
+  setTimeout(()=>{
+    img.remove()
+  },700)
+
+  // 🛒 LÓGICA DEL CARRITO
+  let prod = carrito.find(p => p.nombre === combo.nombre)
+
+  if(prod){
+    prod.cantidad++
+  }else{
+    carrito.push({
+      nombre: combo.nombre + " (Combo)",
+      precio: combo.precio,
+      cantidad: 1
+    })
+  }
+
+  guardarCarrito()
+  mostrarCarrito()
+}
 
 
 
@@ -260,35 +306,28 @@ mostrarCarrito()
 
 function enviarPedido(){
 
-let nombre=document.getElementById("nombre").value
-let direccion=document.getElementById("direccion").value
-let comentarios=document.getElementById("comentarios").value
+  let nombre = document.getElementById("nombre").value
+  let direccion = document.getElementById("direccion").value
 
-let mensaje="🍕 Pedido nuevo%0A%0A"
+  let mensaje = "🍕 Pedido nuevo%0A%0A"
 
-mensaje+=`Cliente: ${nombre}%0A`
-mensaje+=`Dirección: ${direccion}%0A`
-mensaje+=`Comentarios: ${comentarios}%0A%0A`
+  mensaje += "Cliente: " + nombre + "%0A"
+  mensaje += "Dirección: " + direccion + "%0A%0A"
 
-mensaje+="Pedido:%0A"
+  mensaje += "Pedido:%0A"
 
-let total=0
+  let total = 0
 
-carrito.forEach(p=>{
+  carrito.forEach(p=>{
+    mensaje += "- " + p.nombre + " x" + p.cantidad + "%0A"
+    total += p.precio * p.cantidad
+  })
 
-mensaje+=`- ${p.nombre} x${p.cantidad}%0A`
+  mensaje += "%0ATotal: $" + total
 
-total+=p.precio*p.cantidad
+  let telefono = "5401169769132"
 
-})
+  let url = "https://wa.me/" + telefono + "?text=" + mensaje
 
-mensaje+=`%0ATotal: $${total}`
-
-let telefono="5401169769132"
-
-let url=`https://wa.me/${telefono}?text=${mensaje}`
-
-window.open(url)
-
+  window.open(url)
 }
-
