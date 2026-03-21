@@ -1,14 +1,40 @@
+//Menu
 const productos=[
 
-{nombre:"Muzzarella",precio:10000,imagen:"imagenes/muzzarella.jpg"},
-{nombre:"Napolitana",precio:11000,imagen:"imagenes/napolitana.jpg"},
-{nombre:"Fugazzeta",precio:12000,imagen:"imagenes/fugazzeta.jpg"},
-{nombre:"Jamón y morrones",precio:12500,imagen:"imagenes/jamon-y-morrones.jpg"},
-{nombre:"Cochina",precio:13000,imagen:"imagenes/cochina.jpg"},
-{nombre:"Tomate y albahaca",precio:15000,imagen:"imagenes/tomate-y-albahaca.jpg"},
-{nombre:"sandwich de milanesa",precio:9000,imagen:"imagenes/sandwich-de-milanesa.jpg"},
-{nombre:"cono de papas",precio:5000,imagen:"imagenes/cono-de-papas.jpg"},
+{nombre:"Muzzarella",precio:11000,imagen:"imagenes/muzzarella.jpg"},
+{nombre:"Napolitana",precio:12000,imagen:"imagenes/napolitana.jpg"},
+{nombre:"Fugazzeta",precio:13000,imagen:"imagenes/fugazzeta.jpg"},
+{nombre:"Jamón y morrones",precio:13000,imagen:"imagenes/jamon-y-morrones.jpg"},
+{nombre:"Cochina",precio:15000,imagen:"imagenes/cochina.jpg"},
+{nombre:"Tomate y albahaca",precio:14000,imagen:"imagenes/tomate-y-albahaca.jpg"},
+{nombre:"sandwich de milanesa",opciones:[{nombre:"solo",precio:9000},{nombre:"con papas",precio:12000}],imagen:"imagenes/sandwich-de-milanesa.jpg"},
+{nombre:"bandeja de papas",precio:6000,imagen:"imagenes/bandeja-de-papas.jpg"},
+{nombre:"cono de papas",precio:3000,imagen:"imagenes/cono-de-papas.jpg"},
+{nombre:"Cocacola 2.25L",precio:5000,imagen:"imagenes/cocacola.jpg"},
+{nombre:"Jugo levite 1.5L",precio:2500,imagen:"imagenes/levite.jpg"},
+{nombre:"Sprite 2.25L",precio:5000,imagen:"imagenes/sprite.jpg"},
 
+]
+//Carrousel
+const combos = [
+  {
+    nombre: "Combo Milanesa",
+    descripcion: "Sándwich + papas + bebida",
+    precio: 14500,
+    imagen: "imagenes/combo1.jpg"
+  },
+  {
+    nombre: "Combo Muzza",
+    descripcion: "2 pizzas",
+    precio: 20000,
+    imagen: "imagenes/combo2.jpg"
+  },
+  {
+    nombre: "Combo Individual",
+    descripcion: "Muzza + jugo levite 1.5L",
+    precio: 13000,
+    imagen: "imagenes/combo3.jpg"
+  }
 ]
 
 let carrito=JSON.parse(localStorage.getItem("carrito"))||[]
@@ -31,25 +57,45 @@ let menu=document.getElementById("menu")
 
 productos.forEach((p,i)=>{
 
-let card=document.createElement("div")
+  let card = document.createElement("div")
+  card.classList.add("card")
 
-card.classList.add("card")
+  if(p.opciones){
 
-card.innerHTML = `
-<div class="card-bg" style="background-image:url('${p.imagen}')">
-<div class="contenido">
+    card.innerHTML = `
+      <div class="card-bg" style="background-image:url('${p.imagen}')">
+        <div class="contenido">
+          <h3>${p.nombre}</h3>
 
-<h3>${p.nombre}</h3>
-<p>$${p.precio}</p>
+          <button onclick="agregar(${i}, 0)">
+            Solo $${p.opciones[0].precio}
+          </button>
 
-<button onclick="agregar(${i})">
-Agregar
-</button>
+          <button onclick="agregar(${i}, 1)">
+            Con papas $${p.opciones[1].precio}
+          </button>
 
-</div>
+        </div>
+      </div>
+    `
 
-</div>
-`
+  }else{
+
+    card.innerHTML = `
+      <div class="card-bg" style="background-image:url('${p.imagen}')">
+        <div class="contenido">
+          <h3>${p.nombre}</h3>
+          <p>$${p.precio}</p>
+
+          <button onclick="agregar(${i})">
+            Agregar
+          </button>
+
+        </div>
+      </div>
+    `
+
+  }
 
 menu.appendChild(card)
 
@@ -58,6 +104,34 @@ menu.appendChild(card)
 }
 
 cargarMenu()
+
+function cargarCombos(){
+
+  let carrusel = document.getElementById("carruselCombos")
+
+  combos.forEach((c,i)=>{
+
+    let card = document.createElement("div")
+    card.classList.add("combo-card")
+
+    card.innerHTML = `
+      <div class="combo-bg" style="background-image:url('${c.imagen}')">
+        <div class="combo-content">
+          <h3>${c.nombre}</h3>
+          <p>${c.descripcion}</p>
+          <span>$${c.precio}</span>
+
+          <button onclick="agregarCombo(${i})">
+            Pedir combo
+          </button>
+        </div>
+      </div>
+    `
+
+    carrusel.appendChild(card)
+  })
+}
+cargarCombos()
 
 function agregar(i){
     
@@ -133,6 +207,16 @@ guardarCarrito()
 mostrarCarrito()
 
 }
+function scrollCombos(direccion){
+
+  let carrusel = document.getElementById("carruselCombos")
+
+  carrusel.scrollBy({
+    left: direccion * 260, // tamaño de la card
+    behavior: "smooth"
+  })
+
+}
 
 
 function mostrarCarrito(){
@@ -173,15 +257,18 @@ localStorage.setItem("carrito",JSON.stringify(carrito))
 
 mostrarCarrito()
 
+
 function enviarPedido(){
 
 let nombre=document.getElementById("nombre").value
 let direccion=document.getElementById("direccion").value
+let comentarios=document.getElementById("comentarios").value
 
 let mensaje="🍕 Pedido nuevo%0A%0A"
 
 mensaje+=`Cliente: ${nombre}%0A`
-mensaje+=`Dirección: ${direccion}%0A%0A`
+mensaje+=`Dirección: ${direccion}%0A`
+mensaje+=`Comentarios: ${comentarios}%0A%0A`
 
 mensaje+="Pedido:%0A"
 

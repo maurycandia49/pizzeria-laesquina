@@ -47,6 +47,106 @@ header{
   font-weight: 700;
 }
 
+/*carrousel*/
+.carrusel-wrapper{
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+
+.carrusel{
+  display:flex;
+  overflow-x:auto; /* 🔥 importante */
+  gap:15px;
+  scroll-behavior: smooth;
+  width:100%;
+}
+
+/* BOTONES */
+
+.btn-scroll{
+  position:absolute;
+  background:#ff4d00;
+  border:none;
+  color:white;
+  font-size:20px;
+  padding:10px;
+  border-radius:50%;
+  cursor:pointer;
+  z-index:3;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.btn-scroll.left{
+  left:5px;
+}
+
+.btn-scroll.right{
+  right:5px;
+}
+
+/* ocultar scrollbar */
+.carrusel::-webkit-scrollbar{
+  display:none;
+}
+
+.combos{
+  padding:20px;
+  overflow: hidden;
+}
+.combo-card{
+  min-width:250px;
+  flex-shrink:0;
+}
+.combo-card{
+  min-width:250px;
+  flex-shrink:0;
+}
+
+.combo-bg{
+  height:180px;
+  background-size:cover;
+  background-position:center;
+  border-radius:10px;
+  position:relative;
+}
+
+.combo-bg::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  border-radius:10px;
+}
+
+.combo-content{
+  position:relative;
+  z-index:2;
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  height:100%;
+}
+
+.combo-content button{
+  margin-top:10px;
+  background:#ff4d00;
+  border:none;
+  padding:10px;
+  color:white;
+  border-radius:5px;
+}
+
+.combo-card{
+  min-width:250px;
+  flex-shrink:0;
+
+  scroll-snap-align: start; /* 🔥 clave */
+}
+
 .menu{
 display:flex;
 list-style:none;
@@ -346,4 +446,12 @@ font-size:14px;
     font-size: 14px;
   }
 
+  .btn-scroll{
+    display:none;
+  }
+
+  .carrusel{
+    overflow-x:auto;
+  }
 }
+
