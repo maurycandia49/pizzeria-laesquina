@@ -147,11 +147,6 @@ header{
   scroll-snap-align: start; /* 🔥 clave */
 }
 
-.menu{
-display:flex;
-list-style:none;
-gap:20px;
-}
 
 .menu a{
 color:white;
